@@ -1,4 +1,4 @@
-const { Temperaments } = require("../db")
+const { Temperament } = require("../db")
 require("dotenv").config();
 const axios = require("axios")
 const { API_KEY } = process.env;
@@ -19,12 +19,12 @@ const getTemps = async () => {
 
 
     newArr.map(async temp => {
-        await Temperaments.findOrCreate({
+        await Temperament.findOrCreate({
             where: { name: temp }
         })
     })
 
-    const result = await Temperaments.findAll({ order: [['id', 'ASC']] })
+    const result = await Temperament.findAll({ order: [['id', 'ASC']] })
 
     if (result) return result
 

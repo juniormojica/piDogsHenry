@@ -1,5 +1,5 @@
-const { Dog, Temperaments } = require("../db")
-const { conn } = require("../db");
+const { Dog, Temperament } = require("../db")
+const { Op } = require('sequelize');
 const {
     API_KEY
 } = process.env;
@@ -21,7 +21,15 @@ const getAllDogs = async () => {
 
         }
     })
-    const dogsDb = await Dog.findAll()
+    const dogsDb = await Dog.findAll({
+        include: {
+            model: Temperament,
+            attributes: ['name'],
+            through: {
+                attributes: []
+            }
+        }
+    })
     const merge = [...dogsDb, ...apiData]
     return merge
 
@@ -54,8 +62,19 @@ const getDogs = async (name) => {
 
 
     const dataBaseDog = await Dog.findAll({
-        where: conn.where(conn.fn('LOWER', conn.col('name')), 'LIKE', '%' + formatQuery + '%')
-    })
+        where: {
+            name: {
+                [Op.iLike]: `%${name}%`
+            }
+        },
+        include: {
+            model: Temperament,
+            attributes: ['name'],
+            through: {
+                attributes: []
+            }
+        }
+    });
 
     if (dataBaseDog.length === 0 && matchFormat.length === 0) {
         throw Error("EL PERRO BUSCADO NO ESTA EN LA BASE DE DATOS NI EN LA API ")
@@ -69,13 +88,12 @@ const getDogs = async (name) => {
 
 
 const createDog = async (name, height, weight, life_span, image, temperaments) => {
-    if (!name || !height || !weight || !life_span || !image || temperaments) {
+    if (!name || !height || !weight || !life_span || !image || !temperaments) {
         throw Error("Faltan datos para Crear su perrito")
     }
     const newDog = await Dog.create({ name, height, weight, life_span, image })
-    await newDog.addTemperaments(temperaments)
+    await newDog.addTemperament(temperaments)
 
-    console.log(newDog.__proto__);
     return newDog;
 }
 
@@ -103,7 +121,15 @@ const getSingleDog = async (idRaza) => {
 
     } else {
 
-        const dogFinded = await Dog.findByPk(idRaza)
+        const dogFinded = await Dog.findByPk(idRaza, {
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        })
 
         if (!dogFinded) {
             throw Error("No Existe En la base De Datos")
