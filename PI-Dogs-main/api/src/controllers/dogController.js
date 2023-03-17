@@ -1,4 +1,4 @@
-const { Dog } = require("../db")
+const { Dog, Temperaments } = require("../db")
 const { conn } = require("../db");
 const {
     API_KEY
@@ -64,25 +64,19 @@ const getDogs = async (name) => {
     return [...dataBaseDog, ...matchFormat]
 
 
-
-
-
-
-
-
-
-
-
-
 }
 
 
 
-const createDog = async (name, height, weight, life_span, image) => {
-    if (!name || !height || !weight || !life_span || !image) {
+const createDog = async (name, height, weight, life_span, image, temperaments) => {
+    if (!name || !height || !weight || !life_span || !image || temperaments) {
         throw Error("Faltan datos para Crear su perrito")
     }
-    return await Dog.create({ name, height, weight, life_span, image })
+    const newDog = await Dog.create({ name, height, weight, life_span, image })
+    await newDog.addTemperaments(temperaments)
+
+    console.log(newDog.__proto__);
+    return newDog;
 }
 
 const getSingleDog = async (idRaza) => {

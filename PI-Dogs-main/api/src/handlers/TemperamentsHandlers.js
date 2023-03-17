@@ -15,3 +15,8 @@ const getAllTemperaments = async (req, res) => {
 module.exports = {
     getAllTemperaments
 }
+
+
+
+
+

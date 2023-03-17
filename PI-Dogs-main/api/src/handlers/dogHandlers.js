@@ -38,8 +38,8 @@ const dogHandler = async (req, res) => {
 
 const createDogHandler = async (req, res) => {
     try {
-        const { name, height, weight, life_span, image } = req.body
-        const newDog = await createDog(name, height, weight, life_span, image)
+        const { name, height, weight, life_span, image, temperaments } = req.body
+        const newDog = await createDog(name, height, weight, life_span, image, temperaments)
         res.status(200).json(newDog)
     } catch (error) {
         res.status(400).json({ error: error.message })
