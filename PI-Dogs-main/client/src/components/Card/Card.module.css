@@ -1,0 +1,9 @@
+
+.cardContainer{
+    border: 1px solid black;
+}
+.cardImage{
+    width: 400px;
+    height: 400;
+    border-radius: 20rem;
+}

@@ -1,0 +1,36 @@
+.center {
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0rem;
+    height: 5vw;
+
+    /* background-color:var(--button-color); */
+}
+
+.search {
+    height: 50%;
+    margin-right: 0.5em;
+    border-radius: 0.5em;
+    width: 55%;
+    font-size: 1.3rem;
+
+}
+
+.buttonSearch {
+    height: 2.4em;
+    width: 10%;
+    border-radius: 0.5em;
+    border-style: none;
+    background-color: rgb(134, 132, 132);
+    font-size: 1.2rem;
+    font-weight: 600;
+
+}
+
+.buttonSearch:hover {
+    background-color: rgb(75, 172, 75);
+    text-decoration: underline;
+}
