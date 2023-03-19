@@ -104,21 +104,24 @@ const getSingleDog = async (idRaza) => {
 
     if (dataFrom === "api") {
 
-        const response = await axios.get(`${URL}/${idRaza}`)
+        const response = await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}/?api_key=${API_KEY}`)
 
         const api = response.data
-        console.log(api);
-        const formatDog = {
-            id: api.id,
-            name: api.name,
-            image: api?.image?.url,
-            height: api.height?.metric,
-            weight: api.weight?.metric,
-            temperament: api.temperament
+
+        if (api) {
+            console.log(`Entró al if ${dataFrom}`);
+            const formatDog = {
+                id: api.id,
+                name: api.name,
+                height: api.height?.metric,
+                weight: api.weight?.metric,
+                temperament: api.temperament,
+                id_image: api.reference_image_id
+
+            }
+            console.log(formatDog);
+            return formatDog
         }
-        return formatDog
-
-
     } else {
 
         const dogFinded = await Dog.findByPk(idRaza, {

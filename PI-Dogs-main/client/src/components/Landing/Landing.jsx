@@ -10,6 +10,7 @@ const Landing = () => {
         navigate("/home")
     }
     return (<div>
+        <h1>Henry Dogs</h1>
         <h1>AQUI VA LA LANDING / PAGINA PRINCIPAL</h1>
         <button onClick={login}>INGRESAR A HENRY DOGS</button>
     </div>)
