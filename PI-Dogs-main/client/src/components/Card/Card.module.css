@@ -27,7 +27,7 @@
 .dogName {
     text-decoration: none;
     
-    color: var(--font-color)
+    color: rgb(68, 68, 68)
 }
 
 .dogName:hover {

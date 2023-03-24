@@ -18,9 +18,12 @@
 .pageNumbers li {
     list-style: none;
     padding-top: 0.5rem;
-    border: 1px solid white;
-    background-color: blue;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: var(--button-color);  
     cursor: pointer;
+    color: black;
+    font-size: 1.3rem;
+    font-weight: 600;
     margin: 0;
     flex: 2;
 }

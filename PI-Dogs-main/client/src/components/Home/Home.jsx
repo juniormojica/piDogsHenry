@@ -5,7 +5,7 @@ import TempFilter from "../TempFilter/TempFilter";
 
 const Home = () => {
     return (
-        <div>
+        <div className={s.homeContainer}>
             <TempFilter />
 
             <SearchBar />

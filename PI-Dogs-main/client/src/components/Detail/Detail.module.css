@@ -1,0 +1,48 @@
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--button-color);
+    border-radius: 0.5rem;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+.buttonContainer{
+
+
+width: 50%;
+margin: 0 auto;
+margin-bottom: 1rem;
+}
+
+.buttonContainer button { 
+    padding: 0.8rem;
+    width: 50%;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 600;
+     background-color:  rgb(54, 9, 177);
+}
+
+.buttonContainer button:hover { 
+    cursor: pointer;
+}
+
+.style {
+    padding: 0.5rem;
+   
+}
+
+.cardImage {
+
+    height: 16rem;
+   
+    border-radius: 20%;
+}
+
+.detailContainer h2 { 
+    color: white;
+    font-size: 1.5rem;
+}

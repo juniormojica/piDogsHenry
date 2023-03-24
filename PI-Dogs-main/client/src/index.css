@@ -1,27 +1,33 @@
 * {
   --main-color: rgb(64, 64, 75);
-  --button-color: rgb(130, 170, 227);
+  --button-color: rgb(173, 231, 146);
   --font-color: rgb(255, 255, 255);
   --back-ground: rgb(32, 38, 46);
-  --hoover-action: rgb(173, 231, 146);
+  --hoover-action: rgb(84, 153, 82);
   --last-use: rgb(243, 236, 176);
-margin: 0;
+  margin: 0;
   padding: 0;
 }
 
+
+
 body {
-/* background-color: rgb(32, 38, 46); */
-background: rgb(238, 174, 202);
-  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+
   box-sizing: border-box;
   font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: white;
+  color: rgb(68, 68, 68);
   font-weight: 400;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.structure {
+  margin: 0 2.5%;
 }
