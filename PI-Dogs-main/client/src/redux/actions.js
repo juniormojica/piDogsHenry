@@ -4,6 +4,7 @@ export const GET_DOG_DETAIL = "GET_DOG_DETAIL"
 export const CLEAN_DETAIL = "CLEAN_DETAIL"
 export const HIDE_CARDS = "HIDE_CARDS";
 export const SHOW_CARDS = "SHOW_CARDS"
+export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
 
 export const getAllDogs = () => {
     return async (dispatch) => {
@@ -30,4 +31,13 @@ export const showCards = () => {
 }
 export const cleanDetail = () => {
     return { type: CLEAN_DETAIL, payload: {} }
+}
+
+//>>>>>>>>>>>>>>>>>>TEMPERAMENTOS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+export const getTemperaments = () => {
+    return async (dispatch) => {
+        const response = await axios.get("http://localhost:3001/temperaments")
+        return dispatch({ type: GET_TEMPERAMENTS, payload: response.data })
+    }
 }

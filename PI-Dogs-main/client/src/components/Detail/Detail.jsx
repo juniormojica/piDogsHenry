@@ -21,16 +21,27 @@ const Detail = () => {
         navigate("/home")
     }
 
+    const idOrigin = (id) => {
+        if (typeof id === "number") {
+            return false
+        } else {
+            return true
+        }
+    }
+
 
     return (
         <>
             {dogDetails && (<div>
                 <h3>{dogDetails?.name}</h3>
-                <h3>Peso: <br />{dogDetails?.height}</h3>
+                <h3>Altura: <br />{dogDetails?.height}</h3>
+                <h3>peso: <br />{dogDetails?.weight}</h3>
                 <h3>{dogDetails?.id}</h3>
-                <img src={`https://cdn2.thedogapi.com/images/${dogDetails.id_image}.jpg`} alt={dogDetails.name} />
+
+                {dogDetails.id && idOrigin(dogDetails.id) ? (<img src={dogDetails.image} />) : (<img src={`https://cdn2.thedogapi.com/images/${dogDetails.id_image}.jpg`} alt={dogDetails.name} />)}
+
                 <h3>{dogDetails?.life_span}</h3>
-                <h3>{dogDetails?.temperaments}</h3>
+                <h3>{dogDetails?.temperament}</h3>
                 <div>
                     <button onClick={goBack}>Regresar</button>
                 </div>
@@ -41,12 +52,6 @@ const Detail = () => {
 
     )
 }
-// ID.
-//     Imagen.
-//     Nombre.
-//     Altura.
-//     Peso.
-//     Temperamentos.
-// Años de vida.
+
 
 export default Detail

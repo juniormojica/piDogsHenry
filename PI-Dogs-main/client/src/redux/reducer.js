@@ -4,13 +4,14 @@ import {
     GET_ALL_DOGS,
     GET_DOG_DETAIL,
     HIDE_CARDS,
-    showCards,
+    GET_TEMPERAMENTS,
     SHOW_CARDS
 } from "../redux/actions"
 const initialState = {
     allDogs: [],
     dogDetail: {},
-    hideCards: true
+    hideCards: true,
+    temperaments: []
 
 }
 
@@ -22,6 +23,10 @@ const reducer = (state = initialState, { type, payload }) => {
 
         case GET_DOG_DETAIL:
             return { ...state, dogDetail: payload }
+
+        case GET_TEMPERAMENTS:
+
+            return { ...state, temperaments: payload }
 
         case CLEAN_DETAIL:
             return { ...state, dogDetail: payload }

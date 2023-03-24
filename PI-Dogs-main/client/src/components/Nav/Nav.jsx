@@ -1,12 +1,21 @@
-import s from "./Nav.module.css"
+import { NavLink } from "react-router-dom"
+import s from "../../components/Nav/Nav.module.css"
 
-const Nav = () => {
-    return (
-        <>
-            <nav>Aqui va el Nav</nav>
-        </>
-    )
 
+const Nav = (props) => {
+    return (<>
+        <nav className={s.navContainer}>
+
+            <div className={s.linksContainer}>
+                <NavLink className={s.favorites} to="/home" >Home</NavLink>
+                <NavLink className={s.favorites} to="/form" >Crear Perro</NavLink>
+
+                <NavLink className={s.favorites} to="/about" >About</NavLink>
+                <NavLink className={s.favorites} to="/filtro">Filtrar</NavLink>
+            </div>
+        </nav>
+
+    </>)
 }
 
 export default Nav 

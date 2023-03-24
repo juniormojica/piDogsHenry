@@ -17,6 +17,7 @@ const getAllDogs = async () => {
             name: dog.name,
             weight: dog.weight.metric,
             image: dog.image?.url,
+            temperaments: dog.temperaments,
             created: false
 
         }
@@ -46,16 +47,15 @@ const getDogs = async (name) => {
         return dogName.includes(formatQuery)
     })
 
-
-
     matchFormat = match.map((dog) => {
         return {
             id: dog.id,
             name: dog.name,
-            weight: dog.weight.metric,
+            weight: dog.weight?.metric,
             image: dog.image?.url,
             created: false,
-            id_image: dog.reference_image_id
+            id_image: dog.reference_image_id,
+
 
         }
     })
@@ -109,13 +109,13 @@ const getSingleDog = async (idRaza) => {
         const api = response.data
 
         if (api) {
-            console.log(`Entró al if ${dataFrom}`);
+
             const formatDog = {
                 id: api.id,
                 name: api.name,
                 height: api.height?.metric,
                 weight: api.weight?.metric,
-                temperament: api.temperament,
+                temperament: api?.temperament,
                 id_image: api.reference_image_id
 
             }

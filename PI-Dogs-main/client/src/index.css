@@ -1,10 +1,24 @@
+* {
+  --main-color: rgb(64, 64, 75);
+  --button-color: rgb(130, 170, 227);
+  --font-color: rgb(255, 255, 255);
+  --back-ground: rgb(32, 38, 46);
+  --hoover-action: rgb(173, 231, 146);
+  --last-use: rgb(243, 236, 176);
+margin: 0;
+  padding: 0;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+/* background-color: rgb(32, 38, 46); */
+background: rgb(238, 174, 202);
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  box-sizing: border-box;
+  font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
+  font-weight: 400;
 }
 
 code {
