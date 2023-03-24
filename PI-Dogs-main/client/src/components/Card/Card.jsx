@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom"
 import s from "./Card.module.css"
-import { useSelector } from "react-redux"
 
+const tempDb = (temps) => {
+    let temperamentsDb = temps.map((temp) => {
+        return temp.name
+    })
+    const tempsDb = temperamentsDb.join(", ")
 
-const Card = ({ name, id, weight, image, created }) => {
+    return (<h4>{tempsDb}</h4>)
+}
 
+const Card = ({ name, id, weight, image, created, Temperaments }) => {
 
-
-    const { hideCards } = useSelector((state) => state)
-    console.log(hideCards);
-
-    return (<div className={`${s.cardContainer} ${!hideCards ? s.showCards : ""}`}>
+    return (<div className={`${s.cardContainer} `}>
         <Link to={`/detail/${id}`}><h3 className={s.dogName}>{name}</h3></Link>
 
         <h4>Peso<br />{weight}</h4>
@@ -18,6 +20,11 @@ const Card = ({ name, id, weight, image, created }) => {
         <div className={s.imgContainer}>
             <img className={s.cardImage} src={image} alt={name} />
         </div>
+        {typeof Temperaments === "string" ? (
+            <h4>{Temperaments}</h4>
+        ) : (
+            tempDb(Temperaments)
+        )}
 
         <h4><br />{id}</h4>
     </div>)

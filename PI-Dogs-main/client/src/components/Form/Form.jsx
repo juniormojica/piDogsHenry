@@ -100,11 +100,12 @@ const Form = () => {
         console.log(event.target.value);
     }
     return (
-        <>
-            <div>
-                <h2>Aquí podras crear tu mascota</h2>
-            </div>
+        <div className={s.formContainer}>
+
             <form action="" className={s.mainContainer}>
+                <div>
+                    <h2>Aquí podras crear tu mascota</h2>
+                </div>
                 <div className={s.fieldContainer}>
                     <label htmlFor="" className={s.label} >Nombre:</label>
                     <input
@@ -144,7 +145,7 @@ const Form = () => {
 
                 <div className={s.fieldContainer}>
 
-                    <div className={s.alturaContainer}>
+                    <div className={`${s.alturaContainer} ${s.left} ${s.marginTop}`}>
                         <label htmlFor="" className={s.label} >Altura Minima:</label>
                         <input
                             placeholder="Altura Minima"
@@ -157,7 +158,7 @@ const Form = () => {
                     </div>
 
 
-                    <div className={s.alturaContainer}>
+                    <div className={`${s.alturaContainer} ${s.right} ${s.marginTop}`}>
                         <label htmlFor="" className={s.label} >Altura Maxima:</label>
                         <input
                             placeholder="Altura Maxima"
@@ -181,7 +182,7 @@ const Form = () => {
 
                 <div className={s.fieldContainer}>
 
-                    <div className={s.pesoContainer}>
+                    <div className={`${s.pesoContainer} ${s.left} ${s.marginTop}`}>
                         <label htmlFor="" className={s.label} >Peso Minimo:</label>
                         <input
                             placeholder="Peso Minimo"
@@ -194,7 +195,7 @@ const Form = () => {
 
                     </div>
 
-                    <div className={s.pesoContainer}>
+                    <div className={`${s.pesoContainer} ${s.right} ${s.marginTop}`}>
                         <label htmlFor="" className={s.label} >Peso Maximo:</label>
                         <input
                             placeholder="Peso Maximo"
@@ -218,18 +219,9 @@ const Form = () => {
                     )}
                 </div>
 
-
-
-
-
-
-
-
-
-
                 <button type="submit" className={s.button}>CREAR</button>
             </form>
-        </>
+        </div>
     )
 }
 

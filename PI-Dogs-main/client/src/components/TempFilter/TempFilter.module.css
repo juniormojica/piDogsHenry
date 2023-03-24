@@ -3,3 +3,63 @@
     grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
     gap: 2rem;
 }
+
+.tempContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+     margin: 0 auto;
+     margin-top: 7rem;
+}
+
+.tempContainer h2 { 
+   
+   
+    font-size: 2rem;
+    padding: 1rem;
+  
+}
+
+.selectTempContainer{
+    padding: 1rem;
+display: flex;
+width: 100%;
+justify-content: space-around;
+
+}
+.selectTempContainer label {
+width: 20%;
+}
+
+.selectTempContainer select {
+    width: 50%;
+}
+.selectTempContainer button {
+    width: 30%;
+}
+
+.originContainer{
+    
+    padding: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  
+}
+
+.originContainer label { 
+    width: 20%;
+}
+.originContainer select { 
+    width: 50%;
+}
+
+.originContainer button {
+    width: 30%;
+}
+
+.style{
+    
+    padding: 0.5rem;
+}

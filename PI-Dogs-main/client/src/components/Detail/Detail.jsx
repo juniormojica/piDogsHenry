@@ -29,7 +29,20 @@ const Detail = () => {
             return true
         }
     }
+    const tempDb = (temps) => {
+        if (!temps) {
+            return null;
+        }
 
+        const temperamentsDb = temps.map((temp) => {
+            return temp.name;
+        });
+        const tempsDb = temperamentsDb.join(", ");
+
+        return (<h4>{tempsDb}</h4>);
+    };
+
+    console.log(dogDetails.Temperaments);
 
     return (
         <>
@@ -50,7 +63,12 @@ const Detail = () => {
 
                 <h3 className={s.style} >{dogDetails?.id}</h3>
 
-                <h3 className={s.style} >{dogDetails?.temperament}</h3>
+                {dogDetails && (typeof dogDetails.Temperaments === "string" ? (
+                    <h4>{dogDetails.Temperaments}</h4>
+                ) : (
+                    tempDb(dogDetails.Temperaments)
+
+                ))}
 
             </div>)}
         </>

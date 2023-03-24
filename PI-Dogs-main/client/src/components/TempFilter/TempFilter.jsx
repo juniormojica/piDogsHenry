@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { getTemperaments } from "../../redux/actions"
 import s from "./TempFilter.module.css"
-import SearchDog from "../SearchDog/SearchDog"
+// import SearchDog from "../SearchDog/SearchDog"
+import Card from "../Card/Card"
 const TempFilter = () => {
     const dispatch = useDispatch()
     const temperaments = useSelector((state) => state.temperaments)
@@ -12,20 +13,20 @@ const TempFilter = () => {
 
     useState(() => {
         dispatch(getTemperaments())
-    }, [filterTemp])
+    }, [])
 
 
-
+    console.log(dogs);
     const handleSearch = (event) => {
 
         const filteredDogs = dogs.filter((dog) => {
             let police = false;
-            if (typeof dog.Temperaments === "string") {
-                const toArr = dog.Temperaments.split(",")
+            if (typeof dog.temperaments === "string") {
+                const toArr = dog.temperaments.split(",")
 
                 const trimmedArr = toArr.map(str => str.trim()).filter(str => str !== "");
 
-
+                console.log(trimmedArr);
                 for (let i = 0; i < trimmedArr.length; i++) {
 
 
@@ -37,16 +38,17 @@ const TempFilter = () => {
                 }
                 return police;
             } else {
-                if (dog.Temperaments && dog.Temperaments.length) {
-                    for (let i = 0; i < dog.Temperaments.length; i++) {
+                if (dog.temperaments && dog.temperaments.length) {
+                    for (let i = 0; i < dog.temperaments.length; i++) {
 
 
-                        if (dog.Temperaments[i].name === event.target.value) {
+                        if (dog.temperaments[i].name === event.target.value) {
                             police = true;
                             console.log(police);
                         }
 
                     }
+
                     return police;
                     // acceder a la propiedad length de Temperaments
                 }
@@ -54,6 +56,7 @@ const TempFilter = () => {
             }
 
         });
+        console.log(filteredDogs);
         setFilterTemp(filteredDogs)
 
     }
@@ -78,28 +81,33 @@ const TempFilter = () => {
     //>>>>>>>>>>>RENDERIZADO >>>>>>>>>>>>>>>>>>>>>>>
 
     return (
-        <div>
+        <>
+            <div className={s.tempContainer}>
+                <h2>Filtrar Temperamentos</h2>
 
-            <div>
-                <h4>Filtrar Temperamento</h4>
-                {temperaments && (
-                    <select name="temperaments" onChange={handleSearch}>
-                        {temperaments.map((temp) => {
-                            return <option key={temp.id} value={temp.name}>{temp.name}</option>
-                        })}
+                <div className={s.selectTempContainer}>
+                    <h4 className={s.style} >Temperamentos:</h4>
+                    {temperaments && (
+                        <select className={s.style} name="temperaments" onChange={handleSearch}>
+                            {temperaments.map((temp) => {
+                                return <option key={temp.id} value={temp.name}>{temp.name}</option>
+                            })}
 
 
-                    </select>
-                )}
-                <button onClick={cleanFilter}>Quitar Filtro</button>
+                        </select>
+                    )}
+                    <button className={s.style} onClick={cleanFilter}>Quitar Filtro</button>
+
+                </div>
 
                 <div className={s.originContainer}>
-                    <label htmlFor="">Origen</label>
-                    <select onChange={handleOrigin} name="origen" id="">
+                    <h4 className={s.style} >Origen:</h4>
+                    <select className={s.style} onChange={handleOrigin} name="origen" id="">
                         <option value="todos">Todos</option>
                         <option value="true">Data Base</option>
                         <option value="false">Api</option>
                     </select>
+                    <button className={s.style} onClick={cleanFilter}>Quitar Origen</button>
                 </div>
 
 
@@ -111,7 +119,7 @@ const TempFilter = () => {
                     filterTemp && filterTemp.map((dog) => {
                         return (
 
-                            <SearchDog
+                            <Card
                                 name={dog.name}
                                 weight={dog.weight}
                                 id={dog.id}
@@ -124,11 +132,14 @@ const TempFilter = () => {
                 }
             </div>
 
+        </>
 
 
 
 
-        </div>
+
+
+
     )
 }
 

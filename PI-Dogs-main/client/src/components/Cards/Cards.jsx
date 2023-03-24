@@ -18,7 +18,7 @@ const Cards = () => {
     const [maxPageNumberLimit, SetmaxPageNumberLimit] = useState(5)
     const [minPageNumberLimit, SetminPageNumberLimit] = useState(1)
 
-
+    console.log(dogs);
     const pages = []
 
     for (let i = 1; i <= Math.ceil(dogs.length / itemsPerPage); i++) {
@@ -114,6 +114,7 @@ const Cards = () => {
                     weight={dog.weight}
                     image={dog.image}
                     created={dog.created}
+                    Temperaments={dog.Temperaments}
                 />
             })}
         </div>

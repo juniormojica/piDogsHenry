@@ -17,7 +17,7 @@ const getAllDogs = async () => {
             name: dog.name,
             weight: dog.weight.metric,
             image: dog.image?.url,
-            temperaments: dog.temperaments,
+            Temperaments: dog.temperament,
             created: false
 
         }
@@ -55,6 +55,7 @@ const getDogs = async (name) => {
             image: dog.image?.url,
             created: false,
             id_image: dog.reference_image_id,
+
 
 
         }
@@ -115,7 +116,7 @@ const getSingleDog = async (idRaza) => {
                 name: api.name,
                 height: api.height?.metric,
                 weight: api.weight?.metric,
-                temperament: api?.temperament,
+                Temperaments: api?.temperament,
                 id_image: api.reference_image_id
 
             }
