@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { getTemperaments } from "../../redux/actions"
 const Form = () => {
     const dispatch = useDispatch()
-    const temperaments = useSelector((state) => state)
+    const temperaments = useSelector((state) => state.temperaments)
 
 
-
+    console.log(temperaments);
 
     const [form, setForm] = useState(
         {
@@ -54,14 +54,14 @@ const Form = () => {
 
 
 
-        newErrors.pesoMin = (!form.pesoMin) ? "Ingresa Un Peso" : ""
+
         newErrors.pesoMin = (isNaN(Number(form.peso))) ? "El peso debeser un Numero" : ""
         newErrors.pesoMin = (form.pesoMin < 0) ? "El peso no puede ser negativo" : ""
 
 
-        newErrors.pesoMax = (!form.pesoMax) ? "Ingresa Un Peso" : ""
+
         newErrors.pesoMax = (isNaN(Number(form.pesoMax))) ? "El peso debeser un Numero" : ""
-        newErrors.pesoMax = (form.pesoMax < 0) ? "El peso no puede ser negativo" : ""
+        newErrors.pesoMax = (form.pesoMax > 170) ? "El peso no puede ser mayor a 170" : ""
 
 
         newErrors.alturaMax = (form.alturaMax > 2700) ? "No puede medir mas de 2500cm" : ""
@@ -94,6 +94,10 @@ const Form = () => {
 
 
 
+    }
+
+    const hadleSelectInput = (event) => {
+        console.log(event.target.value);
     }
     return (
         <>
@@ -202,9 +206,16 @@ const Form = () => {
                         {errors.pesoMax && <span>{errors.pesoMax}</span>}
                     </div>
 
-
-
-
+                </div>
+                <div>
+                    <h3>Selecciona Uno O Varios temperamentos</h3>
+                    {temperaments && (
+                        <select name="temperaments" onChange={hadleSelectInput} >
+                            {temperaments.map((temp) => {
+                                return <option key={temp.id} value={temp.name}>{temp.name}</option>
+                            })}
+                        </select>
+                    )}
                 </div>
 
 

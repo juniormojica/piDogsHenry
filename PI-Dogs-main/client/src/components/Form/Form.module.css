@@ -76,5 +76,5 @@ h2{
     background-color: var(--hoover-action);
 }
 .input:hover{
-    background-color: var(--hoover-action);
+    background-color:  rgb(220, 222, 224);
 }
