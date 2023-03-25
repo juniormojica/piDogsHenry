@@ -10,7 +10,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 95vh;
     margin: 0 auto;
     margin: 7rem;
     padding-top: 5rem;
@@ -94,4 +94,13 @@ h2{
 }
 .input:hover{
     background-color:  rgb(220, 222, 224);
+}
+
+.temps{
+    display: flex;
+}
+
+.temps li { 
+    list-style: none;
+    padding: 0.5rem;
 }

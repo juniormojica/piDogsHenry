@@ -7,7 +7,8 @@ const Form = () => {
     const temperaments = useSelector((state) => state.temperaments)
 
 
-    console.log(temperaments);
+    const [selecTemps, setSelecTemps] = useState([])
+    const [tempId, setTempId] = useState([])
 
     const [form, setForm] = useState(
         {
@@ -34,6 +35,14 @@ const Form = () => {
     useEffect(() => {
         dispatch(getTemperaments())
     }, [])
+
+    useEffect(() => {
+        const idTemp = temperaments
+            .filter((temp) => selecTemps.includes(temp.name))
+            .map((temp) => temp.id);
+        setTempId(idTemp);
+
+    }, [selecTemps]);
 
 
     const validation = (form) => {
@@ -97,8 +106,22 @@ const Form = () => {
     }
 
     const hadleSelectInput = (event) => {
-        console.log(event.target.value);
+        const value = event.target.value
+
+        setSelecTemps([...selecTemps, value])
+
+
     }
+
+    const handleDelete = (event) => {
+        const clickForDelete = (event.target.textContent);
+
+        const remainTemps = selecTemps.filter((temp) => temp !== clickForDelete)
+        setSelecTemps(remainTemps)
+    }
+
+    console.log(tempId);
+
     return (
         <div className={s.formContainer}>
 
@@ -177,9 +200,6 @@ const Form = () => {
 
                 </div>
 
-
-
-
                 <div className={s.fieldContainer}>
 
                     <div className={`${s.pesoContainer} ${s.left} ${s.marginTop}`}>
@@ -217,6 +237,18 @@ const Form = () => {
                             })}
                         </select>
                     )}
+                </div>
+
+                <div>
+                    <h2>Temperamentos Seleccionados</h2>
+                    <div className={s.temps}>
+                        {selecTemps && selecTemps.map((temp) => {
+                            return (
+
+                                <li onClick={handleDelete} key={temp}>{temp}</li>
+                            )
+                        })}
+                    </div>
                 </div>
 
                 <button type="submit" className={s.button}>CREAR</button>
