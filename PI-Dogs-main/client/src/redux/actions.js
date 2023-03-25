@@ -5,6 +5,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL"
 export const HIDE_CARDS = "HIDE_CARDS";
 export const SHOW_CARDS = "SHOW_CARDS"
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
+export const DOGS_BY_NAME = "DOGS_BY_NAME"
 
 export const getAllDogs = () => {
     return async (dispatch) => {
@@ -41,3 +42,12 @@ export const getTemperaments = () => {
         return dispatch({ type: GET_TEMPERAMENTS, payload: response.data })
     }
 }
+
+//>>>>>>>>>>>>>>>>>>FILTRADO POR NOMBRE DE LA RAZA<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+export const filterbyname = (raza) => {
+
+    return { type: DOGS_BY_NAME, payload: raza }
+
+}
+

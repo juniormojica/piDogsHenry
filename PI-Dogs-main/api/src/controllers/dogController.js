@@ -117,7 +117,8 @@ const getSingleDog = async (idRaza) => {
                 height: api.height?.metric,
                 weight: api.weight?.metric,
                 Temperaments: api?.temperament,
-                id_image: api.reference_image_id
+                id_image: api.reference_image_id,
+
 
             }
             console.log(formatDog);

@@ -16,7 +16,7 @@ const TempFilter = () => {
     }, [])
 
 
-    console.log(dogs);
+
     const handleSearch = (event) => {
 
         const filteredDogs = dogs.filter((dog) => {

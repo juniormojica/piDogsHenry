@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom"
 import s from "./Card.module.css"
 
-const tempDb = (temps) => {
-    let temperamentsDb = temps.map((temp) => {
-        return temp.name
-    })
-    const tempsDb = temperamentsDb.join(", ")
 
-    return (<h4>{tempsDb}</h4>)
-}
 
 const Card = ({ name, id, weight, image, created, Temperaments }) => {
 
@@ -20,12 +13,6 @@ const Card = ({ name, id, weight, image, created, Temperaments }) => {
         <div className={s.imgContainer}>
             <img className={s.cardImage} src={image} alt={name} />
         </div>
-        {typeof Temperaments === "string" ? (
-            <h4>{Temperaments}</h4>
-        ) : (
-            tempDb(Temperaments)
-        )}
-
         <h4><br />{id}</h4>
     </div>)
 }

@@ -1,3 +1,4 @@
+import { all } from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { getAllDogs } from '../../redux/actions';
@@ -9,16 +10,18 @@ const Cards = () => {
 
     const dispatch = useDispatch()
     const allDogs = useSelector((state) => state.allDogs)
+    const nameOfDog = useSelector((state) => state.nameOfDog)
     const [dogs, setDogs] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(8)
+
 
 
     const [pageNumberlimit, SetNumberLimit] = useState(5)
     const [maxPageNumberLimit, SetmaxPageNumberLimit] = useState(5)
     const [minPageNumberLimit, SetminPageNumberLimit] = useState(1)
 
-    console.log(dogs);
+
     const pages = []
 
     for (let i = 1; i <= Math.ceil(dogs.length / itemsPerPage); i++) {
@@ -40,9 +43,20 @@ const Cards = () => {
         allDogs && setDogs(allDogs)
     }, [allDogs])
 
+    useEffect(() => {
+        const dogsFiltered = allDogs.filter((dogs) => dogs.name.toLowerCase().includes(nameOfDog.toLowerCase()))
+        setDogs(dogsFiltered)
+    }, [nameOfDog])
+
+
+
     const handleClick = (event) => {
         setCurrentPage(Number(event.target.id))
     }
+
+
+    nameOfDog && console.log(nameOfDog);
+
 
     const renderPages = pages.map((num) => {
 
@@ -89,22 +103,7 @@ const Cards = () => {
 
 
     return (<>
-        <ul className={s.pageNumbers}>
 
-
-            <li><button onClick={handlePrevButton}
-                disabled={currentPage === pages[0] ? true : false}>
-
-                Prev
-            </button></li>
-
-            {pageDecrementBtn}
-            {renderPages}
-            {pageIncrementBtn}
-            <li><button onClick={handleNextButton}
-                disabled={currentPage === pages[pages.length - 1] ? true : false}>Next</button></li>
-
-        </ul>
 
         <div className={s.CardsContainer}>
             {dogs && currentItems.map((dog) => {
@@ -118,6 +117,26 @@ const Cards = () => {
                 />
             })}
         </div>
+
+        <div className={s.paginationContainer}>
+            <ul className={s.pageNumbers}>
+
+
+                <li><button onClick={handlePrevButton}
+                    disabled={currentPage === pages[0] ? true : false}>
+
+                    Prev
+                </button></li>
+
+                {pageDecrementBtn}
+                {renderPages}
+                {pageIncrementBtn}
+                <li><button onClick={handleNextButton}
+                    disabled={currentPage === pages[pages.length - 1] ? true : false}>Next</button></li>
+
+            </ul>
+        </div>
+
 
     </>
 
