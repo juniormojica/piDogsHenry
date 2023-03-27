@@ -80,6 +80,10 @@ const TempFilter = () => {
 
     }
 
+    const handleOrder = () => {
+
+    }
+
 
     //>>>>>>>>>>>RENDERIZADO >>>>>>>>>>>>>>>>>>>>>>>
 
@@ -113,27 +117,22 @@ const TempFilter = () => {
                     <button className={s.style} onClick={cleanFilter}>Quitar Origen</button>
                 </div>
 
+                <div className={s.orderContainer}>
+                    <h4 className={s.style} >Ordenar:</h4>
+                    <select className={s.style} onChange={handleOrder} name="order" id="">
+                        <option value="todos">A-Z</option>
+                        <option value="true">Z-A</option>
+
+                    </select>
+
+                    <button className={s.style} onClick={cleanFilter}>Remover orden</button>
+                </div>
 
             </div>
+
 
             <h2 className={s.temph2}>Perros segun su temperamento</h2>
-            <div className={s.containerDogs}>
-                {
-                    filterTemp?.map((dog) => {
-                        return (
 
-                            <Card
-                                name={dog.name}
-                                weight={dog.weight}
-                                id={dog.id}
-                                image={dog.image}
-                            />
-
-
-                        )
-                    })
-                }
-            </div>
 
         </>
 
