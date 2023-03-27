@@ -6,7 +6,7 @@ export const HIDE_CARDS = "HIDE_CARDS";
 export const SHOW_CARDS = "SHOW_CARDS"
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
 export const DOGS_BY_NAME = "DOGS_BY_NAME"
-
+export const LOAD_DOGS_FOR_FILTER = "LOAD_DOGS_FOR_FILTER"
 export const getAllDogs = () => {
     return async (dispatch) => {
         const response = await axios.get(`http://localhost:3001/dogs`)

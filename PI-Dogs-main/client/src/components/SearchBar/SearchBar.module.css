@@ -19,6 +19,9 @@
     font-weight: 600;
 
 }
+.search:hover {
+    background-color: var(--button-color);
+}
 
 .buttonSearch {
     height: 2.4em;

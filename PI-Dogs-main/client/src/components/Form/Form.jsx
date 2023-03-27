@@ -2,12 +2,14 @@ import s from "./Form.module.css"
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getTemperaments } from "../../redux/actions"
+import axios from "axios"
 const Form = () => {
     const dispatch = useDispatch()
     const temperaments = useSelector((state) => state.temperaments)
 
 
     const [selecTemps, setSelecTemps] = useState([])
+    const [localTemps, setLocalTemps] = useState([])
     const [tempId, setTempId] = useState([])
 
     const [form, setForm] = useState(
@@ -18,23 +20,31 @@ const Form = () => {
             pesoMax: "",
             pesoMin: "",
             vida: "",
-            imagen: ""
+            imagen: "",
+
+
+
         })
 
     const [errors, setErrors] = useState(
         {
-            nombre: "",
-            alturaMin: "",
-            alturaMax: "",
-            pesoMax: "",
-            pesoMin: "",
-            vida: "",
-            imagen: ""
+            // nombre: "",
+            // alturaMin: "",
+            // alturaMax: "",
+            // pesoMax: "",
+            // pesoMin: "",
+            // vida: "",
+            // imagen: "",
+
         })
 
     useEffect(() => {
         dispatch(getTemperaments())
     }, [])
+
+    useEffect(() => {
+        setLocalTemps(temperaments)
+    }, [temperaments])
 
     useEffect(() => {
         const idTemp = temperaments
@@ -46,43 +56,78 @@ const Form = () => {
 
 
     const validation = (form) => {
-        const newErrors = {}
-        function validarURL(url) {
-            var regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-            return regex.test(url);
+        let errors = {};
+
+        // NAME
+        if (!form.nombre) {
+            errors.nombre = "Escribe Un nombre";
+        }
+
+        if (!form.vida) {
+            errors.vida = "Escribe la esperanza de vida "
+        } else if (form.vida <= 0) {
+            errors.vida = "No puede ser menor a 0"
+        } else if (form.vida >= 28) {
+            errors.vida = "Los perros no pueden vivir tantos años"
+        }
+
+        // WEIGHTS
+        if (!form.pesoMin) {
+            // weight min
+            errors.pesoMin = "Escribe un peso minimo valido";
+        } else if (form.pesoMin <= 0) {
+            errors.pesoMin = "No se reciben valores negativos";
         }
 
 
-
-        newErrors.nombre = (!form.nombre) ? "Escribe un nombre" : ""
-        newErrors.alturaMin = (!form.alturaMin) ? "Escribe un numero" : ""
-        newErrors.alturaMax = (!form.alturaMax) ? "Escribe un numero" : ""
-
-        newErrors.alturaMin = (!isNaN(Number(form.alturaMin))) ? "Debe ser un numero" : ""
-        newErrors.alturaMax = (!isNaN(Number(form.alturaMax))) ? "Debe ser un numero" : ""
+        // if (form.pesoMin > form.pesoMax) {
+        //     errors.pesoMin = "El peso Minimo No puede ser mayor al maximo"
+        // }
 
 
+        if (form.pesoMax < form.pesoMax) {
+            errors.pesoMin = "El peso Maximo No puede ser menor al Minimo"
+        }
 
 
-        newErrors.pesoMin = (isNaN(Number(form.peso))) ? "El peso debeser un Numero" : ""
-        newErrors.pesoMin = (form.pesoMin < 0) ? "El peso no puede ser negativo" : ""
+        if (!form.pesoMax) {
+            // weight max
+            errors.pesoMax = "Escribe un peso maximo valido";
+        } else if (form.pesoMax >= 170) {
+            errors.pesoMax = "El valor tiene que ser menor a 2700";
+        } else if (form.pesoMax <= 0) {
+            errors.pesoMax = "No se reciben valores negativos";
+        }
+        // HEIGHTS
+        if (!form.alturaMin) {
+            // height min
+            errors.alturaMin = "Escribe una altura minima valido";
+
+        } else if ((Number(form.alturaMin)) <= 0) {
+            errors.alturaMin = "No se reciben valores negativos";
+        }
+        if (!form.alturaMax) {
+            // height max
+            errors.alturaMax = "Escribe una altura maxima valida";
+        } else if (form.alturaMax >= 2700) {
+            errors.alturaMax = "El valor no puede ser mayor a 2700";
+        } else if (form.alturaMax <= 0) {
+            errors.alturaMax = "No se aceptan numeros negativos";
+        }
+
+        if (form.alturaMin > form.alturaMax) {
+            errors.alturaMin = "La Altura Minima No puede ser mayor a la Altura Maxima"
+        }
 
 
+        if (form.alturaMax < form.alturaMin) {
+            errors.alturaMaxa = "La altura  Maxima No puede ser menor a la altura Minima"
+        }
 
-        newErrors.pesoMax = (isNaN(Number(form.pesoMax))) ? "El peso debeser un Numero" : ""
-        newErrors.pesoMax = (form.pesoMax > 170) ? "El peso no puede ser mayor a 170" : ""
-
-
-        newErrors.alturaMax = (form.alturaMax > 2700) ? "No puede medir mas de 2500cm" : ""
-        newErrors.alturaMin = (form.alturaMin < 0) ? "Tu perro No puede medir 0" : ""
-
-        newErrors.vida = (form.vida <= 0) ? "Debe ser un numero mayor a 0" : ""
-
-        newErrors.vida = (form.vida > 29) ? "El perro mas viejo del mundo vivío 29 años" : ""
-
-        newErrors.imagen = (validarURL(form.imagen) ? "" : "URL invalida compita")
-
-        setErrors({ ...errors, ...newErrors })
+        if (!(/\bhttps?:\/\/\S+\.(\S+)?(\?\S*)?\b/i).test(form.imagen)) {
+            errors.imagen = "URL invalida"
+        }
+        return errors;
 
 
     }
@@ -91,17 +136,16 @@ const Form = () => {
     const handleChange = (event) => {
         const value = event.target.value;
         const property = event.target.name;
-        validation({
-            ...form,
-            [property]: value
-        },)
+
         setForm({
             ...form,
             [property]: value
         })
 
-
-
+        setErrors(validation({
+            ...form,
+            [property]: value
+        },))
 
     }
 
@@ -110,8 +154,19 @@ const Form = () => {
 
         setSelecTemps([...selecTemps, value])
 
+        const updatedTemperaments = localTemps.map((temp) => {
+            if (temp.name === value) {
+                return {
+                    ...temp,
+                    disabled: true
+                };
+            }
+            return temp;
+        });
 
+        setLocalTemps(updatedTemperaments);
     }
+
 
     const handleDelete = (event) => {
         const clickForDelete = (event.target.textContent);
@@ -120,12 +175,58 @@ const Form = () => {
         setSelecTemps(remainTemps)
     }
 
-    console.log(tempId);
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        if (selecTemps.length === 0) {
+            return alert("Selecciona los temperamentos")
+        }
+
+        console.log(errors);
+        if (Object.values(errors).length === 0) {
+
+            setForm({
+                nombre: "",
+                alturaMin: "",
+                alturaMax: "",
+                pesoMax: "",
+                pesoMin: "",
+                vida: "",
+                imagen: "",
+            })
+
+
+
+            axios.post("http://localhost:3001/dogs", {
+                name: form.nombre,
+                height: `${form.alturaMin}-${form.alturaMax}`,
+                weight: `${form.pesoMin}-${form.pesoMax}`,
+                life_span: form.vida,
+                created: true,
+                image: form.imagen,
+                temperament: tempId
+            }).then((res) => console.log(res.data))
+            alert("Datos completos")
+
+        }
+        else {
+            console.log(form);
+            alert("Debes corregir los errores")
+
+
+        }
+
+
+    }
+
+
+
+
 
     return (
         <div className={s.formContainer}>
 
-            <form action="" className={s.mainContainer}>
+            <form onSubmit={handleSubmit} action="" className={s.mainContainer}>
                 <div>
                     <h2>Aquí podras crear tu mascota</h2>
                 </div>
@@ -231,8 +332,8 @@ const Form = () => {
                 <div>
                     <h3>Selecciona Uno O Varios temperamentos</h3>
                     {temperaments && (
-                        <select name="temperaments" onChange={hadleSelectInput} >
-                            {temperaments.map((temp) => {
+                        <select name="temps" onChange={hadleSelectInput} >
+                            {localTemps.map((temp) => {
                                 return <option key={temp.id} value={temp.name}>{temp.name}</option>
                             })}
                         </select>
@@ -249,7 +350,9 @@ const Form = () => {
                             )
                         })}
                     </div>
+
                 </div>
+                {errors.temps && <span>{errors.temps}</span>}
 
                 <button type="submit" className={s.button}>CREAR</button>
             </form>

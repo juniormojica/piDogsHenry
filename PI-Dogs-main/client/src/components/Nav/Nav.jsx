@@ -11,7 +11,7 @@ const Nav = (props) => {
                 <NavLink className={s.favorites} to="/form" >Crear Perro</NavLink>
 
                 <NavLink className={s.favorites} to="/about" >About</NavLink>
-                <NavLink className={s.favorites} to="/filtro">Filtrar</NavLink>
+
             </div>
         </nav>
 

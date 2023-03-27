@@ -3,7 +3,9 @@
     grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
     gap: 2rem;
     
+    
 }
+
 
 .paginationContainer{
     width: 30%;

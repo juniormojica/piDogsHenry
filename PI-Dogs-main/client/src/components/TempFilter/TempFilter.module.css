@@ -7,18 +7,28 @@
 .tempContainer{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     width: 60%;
+  
      margin: 0 auto;
-     margin-top: 7rem;
+    margin: 7rem 0;
+    align-items: center;
+     background-color: var(--button-color);
+     opacity: 0.7;
+     color: black;
+     border-radius: 1rem;
 }
 
 .tempContainer h2 { 
    
-   
+  
     font-size: 2rem;
     padding: 1rem;
   
+}
+.temph2{
+   text-align: center;
+   padding: 1rem;
 }
 
 .selectTempContainer{

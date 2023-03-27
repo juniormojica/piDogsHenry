@@ -5,14 +5,16 @@ import {
     GET_DOG_DETAIL,
     HIDE_CARDS,
     GET_TEMPERAMENTS,
-    SHOW_CARDS, DOGS_BY_NAME
+    SHOW_CARDS, DOGS_BY_NAME,
+    LOAD_DOGS_FOR_FILTER
 } from "../redux/actions"
 const initialState = {
     allDogs: [],
     dogDetail: {},
     hideCards: true,
     temperaments: [],
-    nameOfDog: ""
+    nameOfDog: "",
+
 
 }
 
@@ -42,8 +44,9 @@ const reducer = (state = initialState, { type, payload }) => {
             return { ...state, nameOfDog: payload }
 
 
+
         default:
-            return { ...state }
+            return { ...state, dogsForFilter: payload }
     }
 }
 

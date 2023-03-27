@@ -49,6 +49,7 @@ const Detail = () => {
             <div className={s.buttonContainer}>
                 <button onClick={goBack}>Regresar</button>
             </div>
+            
             {dogDetails && (
                 <div className={s.detailContainer}>
                     <div className={s.textInfo}>

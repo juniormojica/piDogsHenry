@@ -1,65 +1,67 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { getTemperaments } from "../../redux/actions"
+import { getTemperaments, } from "../../redux/actions"
 import s from "./TempFilter.module.css"
 // import SearchDog from "../SearchDog/SearchDog"
 import Card from "../Card/Card"
+import { legacy_createStore } from "redux"
 const TempFilter = () => {
     const dispatch = useDispatch()
     const temperaments = useSelector((state) => state.temperaments)
     const dogs = useSelector((state) => state.allDogs)
+
     const [filterTemp, setFilterTemp] = useState([])
+    const [dogsForFilter, setDogsForFilter] = useState([])
 
 
     useState(() => {
         dispatch(getTemperaments())
-    }, [])
+
+    }, [dogs])
 
 
+    useState(() => {
+        const response = dogs.map((dog) => {
+            if (Array.isArray(dog.Temperaments)) {
+                const eachTemp = dog.Temperaments.map((temp) => temp.name)
+                const some = eachTemp.join(",")
 
-    const handleSearch = (event) => {
+                console.log(Array.from(some).join(" "));
 
-        const filteredDogs = dogs.filter((dog) => {
-            let police = false;
-            if (typeof dog.temperaments === "string") {
-                const toArr = dog.temperaments.split(",")
+                return { ...dog, Temperaments: some }
 
-                const trimmedArr = toArr.map(str => str.trim()).filter(str => str !== "");
-
-                console.log(trimmedArr);
-                for (let i = 0; i < trimmedArr.length; i++) {
-
-
-                    if (trimmedArr[i] === event.target.value) {
-                        police = true;
-                        console.log(police);
-                    }
-
-                }
-                return police;
             } else {
-                if (dog.temperaments && dog.temperaments.length) {
-                    for (let i = 0; i < dog.temperaments.length; i++) {
 
 
-                        if (dog.temperaments[i].name === event.target.value) {
-                            police = true;
-                            console.log(police);
-                        }
-
-                    }
-
-                    return police;
-                    // acceder a la propiedad length de Temperaments
-                }
-
+                return { ...dog }
             }
 
-        });
-        console.log(filteredDogs);
-        setFilterTemp(filteredDogs)
+        })
+
+        response && setDogsForFilter(response)
+    }, [dogs])
+
+
+
+    console.log(dogsForFilter);
+    const handleSearch = (event) => {
+        const value = event.target.value
+
+
+
+        const filterDog = dogsForFilter.filter((dog) => value.includes(dog.Temperaments
+        ))
+        console.log(filterDog);
+
 
     }
+
+
+
+
+
+
+
 
     const cleanFilter = () => {
         setFilterTemp([])
@@ -77,6 +79,7 @@ const TempFilter = () => {
 
 
     }
+
 
     //>>>>>>>>>>>RENDERIZADO >>>>>>>>>>>>>>>>>>>>>>>
 
@@ -113,10 +116,10 @@ const TempFilter = () => {
 
             </div>
 
-            <h2>Perros segun su temperamento</h2>
+            <h2 className={s.temph2}>Perros segun su temperamento</h2>
             <div className={s.containerDogs}>
                 {
-                    filterTemp && filterTemp.map((dog) => {
+                    filterTemp?.map((dog) => {
                         return (
 
                             <Card
@@ -134,13 +137,16 @@ const TempFilter = () => {
 
         </>
 
-
-
-
-
-
-
     )
 }
+
+
+
+
+
+
+
+
+
 
 export default TempFilter

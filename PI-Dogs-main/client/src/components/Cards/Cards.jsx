@@ -55,7 +55,7 @@ const Cards = () => {
     }
 
 
-    nameOfDog && console.log(nameOfDog);
+
 
 
     const renderPages = pages.map((num) => {
