@@ -101,3 +101,22 @@ width: 20%;
 .orderContainer button {
     width: 30%;
 }
+
+.pesoContainer{
+    padding: 1rem;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+}
+
+.pesoContainer label {
+    width: 20%;
+}
+
+.pesoContainer select {
+    width: 50%;
+}
+
+.pesoContainer button {
+    width: 30%;
+}

@@ -100,6 +100,19 @@ const Cards = () => {
         pageDecrementBtn = <li onClick={handlePrevButton}>&hellip;</li>
     }
 
+    const tempDb = (temps) => {
+        if (!temps) {
+            return null;
+        }
+
+        const temperamentsDb = temps.map((temp) => {
+            return temp.name;
+        });
+        const tempsDb = temperamentsDb.join(", ");
+
+        return (<h4>{tempsDb}</h4>);
+    };
+
 
 
     return (<>
@@ -114,6 +127,7 @@ const Cards = () => {
                     image={dog.image}
                     created={dog.created}
                     Temperaments={dog.Temperaments}
+                    tempDb={tempDb}
                 />
             })}
         </div>

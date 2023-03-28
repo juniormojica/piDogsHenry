@@ -127,11 +127,21 @@ const TempFilter = () => {
 
                     <button className={s.style} onClick={cleanFilter}>Remover orden</button>
                 </div>
+                <div className={s.pesoContainer}>
+                    <h4 className={s.style} >Peso:</h4>
+                    <select className={s.style} onChange={handleOrder} name="order" id="">
+                        <option value="todos">Mayor-Menor</option>
+                        <option value="true">Menor-Mayor</option>
+
+                    </select>
+
+                    <button className={s.style} onClick={cleanFilter}>Remover orden</button>
+                </div>
 
             </div>
 
 
-            <h2 className={s.temph2}>Perros segun su temperamento</h2>
+
 
 
         </>

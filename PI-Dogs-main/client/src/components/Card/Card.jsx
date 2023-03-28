@@ -3,7 +3,8 @@ import s from "./Card.module.css"
 
 
 
-const Card = ({ name, id, weight, image, created, Temperaments }) => {
+const Card = ({ name, id, weight, image, created, Temperaments, tempDb }) => {
+
 
     return (<div className={`${s.cardContainer} `}>
         <Link to={`/detail/${id}`}><h3 className={s.dogName}>{name}</h3></Link>
@@ -13,6 +14,13 @@ const Card = ({ name, id, weight, image, created, Temperaments }) => {
         <div className={s.imgContainer}>
             <img className={s.cardImage} src={image} alt={name} />
         </div>
+
+        {(typeof Temperaments === "string" ? (
+            <h4>{Temperaments}</h4>
+        ) : (
+            tempDb(Temperaments)
+
+        ))}
         <h4><br />{id}</h4>
     </div>)
 }
