@@ -7,6 +7,12 @@ export const SHOW_CARDS = "SHOW_CARDS"
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
 export const DOGS_BY_NAME = "DOGS_BY_NAME"
 export const FILTER_TABLE = "FILTER_TABLE"
+export const FILTER_ORIGIN_TABLE = "FILTER_ORIGIN_TABLE"
+export const FILTER_ORDER_TABLE = "FILTER_ORDER_TABLE"
+export const CLEAN_ALL_FILTER = "CLEAN_ALL_FILTER"
+export const FILTER_WEIGHT_TABLE = "FILTER_WEIGHT_TABLE"
+
+
 export const getAllDogs = () => {
     return async (dispatch) => {
         const response = await axios.get(`http://localhost:3001/dogs`)
@@ -51,9 +57,78 @@ export const filterbyname = (raza) => {
 
 }
 
-export const filterTable = (dogs) => {
+export const filterTable = (value, dogs) => {
 
-    return { type: FILTER_TABLE, payload: dogs }
+    const filteredDogs = dogs.filter((dog) => {
+        if (typeof dog.Temperaments === "string") {
 
-}
+            return dog.Temperaments.toLowerCase().includes(value.toLowerCase());
+        } else if (Array.isArray(dog.Temperaments)) {
+
+            const tempNames = dog.Temperaments.map((temperament) => temperament.name);
+            return tempNames.some((name) => name.toLowerCase().includes(value.toLowerCase()));
+        }
+        return false; // Ignore dogs with undefined Temperaments
+    });
+    return { type: FILTER_TABLE, payload: filteredDogs };
+};
+
+export const filterOriginTable = (value, dogs) => {
+    if (value === "true") {
+        const infoFromDb = dogs.filter((dog) => dog.created === true);
+        return { type: FILTER_ORIGIN_TABLE, payload: infoFromDb };
+    } else {
+        const infoFromApi = dogs.filter((dog) => dog.created === false);
+        return { type: FILTER_ORIGIN_TABLE, payload: infoFromApi };
+    }
+};
+
+export const filterOrderTable = (value, dogs) => {
+    if (value === "az") {
+        const sortedDogs = [...dogs].sort(function (a, b) { // hacer una copia con spread operator
+            return a.name.localeCompare(b.name);
+        });
+        return { type: FILTER_ORDER_TABLE, payload: sortedDogs };
+
+    } else if (value === "za") {
+        const sortedDogs = [...dogs].sort(function (a, b) { // hacer una copia con spread operator
+            return b.name.localeCompare(a.name);
+        });
+
+        return { type: FILTER_ORDER_TABLE, payload: sortedDogs };
+
+    }
+};
+
+export const filterWeightTable = (value, dogs) => {
+    if (value === "menor") {
+        const sortedDogs = dogs.map((dog) => {
+            const arrNumber = dog.weight.split("-").map(weight => parseInt(weight))
+            const sum = (arrNumber[0] + arrNumber[1]) / 2
+
+            return { ...dog, weight: sum };
+        }) // Ordenar de menor a mayor
+
+        const result = sortedDogs.sort((a, b) => a.weight - b.weight);
+        return { type: FILTER_WEIGHT_TABLE, payload: result };
+    }
+
+    if (value === "mayor") {
+        const sortedDogs = dogs.map((dog) => {
+            const arrNumber = dog.weight.split("-").map(weight => parseInt(weight))
+            const sum = (arrNumber[0] + arrNumber[1]) / 2
+
+            return { ...dog, weight: sum };
+        }) // Ordenar de menor a mayor
+
+        const result = sortedDogs.sort((b, a) => a.weight - b.weight);
+        return { type: FILTER_WEIGHT_TABLE, payload: result };
+    }
+};
+
+
+
+export const cleanAllFilters = (dogs) => {
+    return { type: CLEAN_ALL_FILTER, payload: dogs };
+};
 

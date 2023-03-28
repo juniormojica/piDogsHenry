@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { getTemperaments, filterTable } from "../../redux/actions"
+import { getTemperaments, filterTable, filterOriginTable, filterOrderTable, cleanAllFilters, filterWeightTable } from "../../redux/actions"
 
 import s from "./TempFilter.module.css"
 
@@ -20,87 +20,40 @@ const TempFilter = () => {
     }, [dogs])
 
 
-    useState(() => {
-        const response = dogs.map((dog) => {
-            if (Array.isArray(dog.Temperaments)) {
-                const eachTemp = dog.Temperaments.map((temp) => temp.name)
-                const some = eachTemp.join(",")
-
-                console.log(Array.from(some).join(" "));
-
-                return { ...dog, Temperaments: some }
-
-            } else {
-
-
-                return { ...dog }
-            }
-
-        })
-
-        response && setDogsForFilter(response)
-    }, [dogs])
 
 
 
     console.log(dogsForFilter);
     const handleSearch = (event) => {
         const value = event.target.value
-        const filterDog = dogsForFilter.filter((dog) => value.includes(dog.Temperaments
-        ))
-        console.log(filterDog);
+
+        dispatch(filterTable(value, dogs))
+
 
     }
+    const handleOrigin = (event) => {
+        const value = event.target.value
 
+        dispatch(filterOriginTable(value, dogs))
+
+    }
 
 
     const cleanFilter = () => {
-        dispatch(filterTable(dogs))
+        dispatch(cleanAllFilters(dogs))
     }
 
-    const handleOrigin = (event) => {
-        const inputValue = event.target.value
-
-        console.log(inputValue);
-        if (inputValue === "true") {
-            const infoFromDb = dogs.filter((dog) => dog.created === true)
-
-            setFilter(infoFromDb)
-            return dispatch(filterTable(infoFromDb))
-        }
-        if (inputValue === "false") {
-            const infoFromApi = dogs.filter((dog) => dog.created === false)
-            setFilter(infoFromApi)
-
-            return dispatch(filterTable(infoFromApi))
-
-        }
-
-        console.log("entra acá");
-        dispatch(filterTable(dogs))
-
-
-
-
-
-    }
-
-    console.log(dogs);
 
     const handleOrder = (event) => {
-        const inputValue = event.target.value;
+        const value = event.target.value;
 
-        if (inputValue === "az") {
-            const sortedDogs = [...dogs].sort(function (a, b) { // hacer una copia con spread operator
-                return a.name.localeCompare(b.name);
-            });
-            dispatch(filterTable(sortedDogs));
-        } else if (inputValue === "za") {
-            const sortedDogs = [...dogs].sort(function (a, b) { // hacer una copia con spread operator
-                return b.name.localeCompare(a.name);
-            });
-            dispatch(filterTable(sortedDogs));
-        }
+        dispatch(filterOrderTable(value, dogs))
+
+    }
+
+    const handleWeight = (event) => {
+        const value = event.target.value;
+        dispatch(filterWeightTable(value, dogs))
     }
 
 
@@ -117,7 +70,7 @@ const TempFilter = () => {
                     {temperaments && (
                         <select className={s.style} name="temperaments" onChange={handleSearch}>
                             {temperaments.map((temp) => {
-                                return <option key={temp.id} value={temp.name}>{temp.name}</option>
+                                return <option key={temp.id} value={temp.name} id="temper" >{temp.name}</option>
                             })}
 
 
@@ -153,9 +106,9 @@ const TempFilter = () => {
 
                 <div className={s.pesoContainer}>
                     <h4 className={s.style} >Peso:</h4>
-                    <select className={s.style} onChange={handleOrder} name="order" id="">
-                        <option value="todos">Mayor-Menor</option>
-                        <option value="true">Menor-Mayor</option>
+                    <select className={s.style} onChange={handleWeight} name="order" id="">
+                        <option value="mayor">Mayor-Menor</option>
+                        <option value="menor">Menor-Mayor</option>
 
                     </select>
 

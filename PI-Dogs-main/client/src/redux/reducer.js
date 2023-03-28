@@ -6,7 +6,11 @@ import {
     HIDE_CARDS,
     GET_TEMPERAMENTS,
     SHOW_CARDS, DOGS_BY_NAME,
-    FILTER_TABLE
+    FILTER_TABLE,
+    FILTER_ORIGIN_TABLE,
+    FILTER_ORDER_TABLE,
+    CLEAN_ALL_FILTER,
+    FILTER_WEIGHT_TABLE
 } from "../redux/actions"
 const initialState = {
     allDogs: [],
@@ -46,6 +50,19 @@ const reducer = (state = initialState, { type, payload }) => {
 
         case FILTER_TABLE:
             return { ...state, filterTableDogs: payload }
+
+        case FILTER_ORIGIN_TABLE:
+            return { ...state, filterTableDogs: payload }
+
+        case FILTER_ORDER_TABLE:
+            return { ...state, filterTableDogs: payload }
+
+        case CLEAN_ALL_FILTER:
+            return { ...state, filterTableDogs: payload }
+
+        case FILTER_WEIGHT_TABLE:
+            return { ...state, filterTableDogs: payload }
+
 
 
 
