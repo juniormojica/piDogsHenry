@@ -120,3 +120,18 @@ width: 20%;
 .pesoContainer button {
     width: 30%;
 }
+
+.button{
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  
+}
+
+.button:hover{
+    background-color: var( --main-color);
+    cursor: pointer;
+    color: white;
+}

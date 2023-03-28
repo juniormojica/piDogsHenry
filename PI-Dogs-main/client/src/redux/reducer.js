@@ -6,7 +6,7 @@ import {
     HIDE_CARDS,
     GET_TEMPERAMENTS,
     SHOW_CARDS, DOGS_BY_NAME,
-    LOAD_DOGS_FOR_FILTER
+    FILTER_TABLE
 } from "../redux/actions"
 const initialState = {
     allDogs: [],
@@ -14,6 +14,7 @@ const initialState = {
     hideCards: true,
     temperaments: [],
     nameOfDog: "",
+    filterTableDogs: []
 
 
 }
@@ -42,6 +43,9 @@ const reducer = (state = initialState, { type, payload }) => {
 
         case DOGS_BY_NAME:
             return { ...state, nameOfDog: payload }
+
+        case FILTER_TABLE:
+            return { ...state, filterTableDogs: payload }
 
 
 

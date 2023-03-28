@@ -10,7 +10,9 @@ const Cards = () => {
 
     const dispatch = useDispatch()
     const allDogs = useSelector((state) => state.allDogs)
+    const filterTable = useSelector((state) => state.filterTableDogs)
     const nameOfDog = useSelector((state) => state.nameOfDog)
+
     const [dogs, setDogs] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(8)
@@ -47,6 +49,10 @@ const Cards = () => {
         const dogsFiltered = allDogs.filter((dogs) => dogs.name.toLowerCase().includes(nameOfDog.toLowerCase()))
         setDogs(dogsFiltered)
     }, [nameOfDog])
+
+    useEffect(() => {
+        filterTable && setDogs(filterTable)
+    }, [filterTable])
 
 
 
