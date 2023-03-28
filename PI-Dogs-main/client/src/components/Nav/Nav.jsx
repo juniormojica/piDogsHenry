@@ -9,8 +9,9 @@ const Nav = (props) => {
             <div className={s.linksContainer}>
                 <NavLink className={s.favorites} to="/home" >Home</NavLink>
                 <NavLink className={s.favorites} to="/form" >Crear Perro</NavLink>
+                <NavLink className={s.favorites} to="/" >Landing</NavLink>
 
-                <NavLink className={s.favorites} to="/about" >About</NavLink>
+
 
             </div>
         </nav>

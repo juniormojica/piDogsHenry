@@ -62,7 +62,7 @@ const TempFilter = () => {
     return (
         <>
             <div className={s.tempContainer}>
-                <h2>Filtrar Temperamentos</h2>
+                <h2>Filtrar/Ordenar</h2>
 
                 {/* SELECCIONAR TEMPERAMENTOS */}
                 <div className={s.selectTempContainer}>

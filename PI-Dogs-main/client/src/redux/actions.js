@@ -107,7 +107,7 @@ export const filterWeightTable = (value, dogs) => {
             const sum = (arrNumber[0] + arrNumber[1]) / 2
 
             return { ...dog, weight: sum };
-        }) // Ordenar de menor a mayor
+        })
 
         const result = sortedDogs.sort((a, b) => a.weight - b.weight);
         return { type: FILTER_WEIGHT_TABLE, payload: result };
@@ -119,7 +119,7 @@ export const filterWeightTable = (value, dogs) => {
             const sum = (arrNumber[0] + arrNumber[1]) / 2
 
             return { ...dog, weight: sum };
-        }) // Ordenar de menor a mayor
+        })
 
         const result = sortedDogs.sort((b, a) => a.weight - b.weight);
         return { type: FILTER_WEIGHT_TABLE, payload: result };
