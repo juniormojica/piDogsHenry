@@ -1,6 +1,12 @@
 
-
+.tittleContainer{
+    width: 25%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 0.7rem;
+}
 .tittle{
-    padding: 1rem;
-    text-align: center;
+text-align: center;
+
 }

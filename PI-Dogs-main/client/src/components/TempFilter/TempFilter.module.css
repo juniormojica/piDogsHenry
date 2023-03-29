@@ -1,21 +1,14 @@
 
-.containerDogs{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
-    gap: 2rem;
-}
 
 .tempContainer{
     display: flex;
     flex-direction: column;
-    
     width: 50%;
-    
      margin: 0 auto;
     padding: 0 5rem;
     margin-top: 10rem;
     align-items: center;
-     background-color: var(--button-color);
+     background-color: var(--main-color);
   
      border-radius: 1rem;
 }
@@ -127,11 +120,22 @@ width: 20%;
     border-radius: 1rem;
     font-weight: 600;
     font-size: 1.1rem;
+    background-color: transparent;
   
 }
 
 .button:hover{
-    background-color: var( --main-color);
+  
     cursor: pointer;
-    color: white;
+    color:black;
+    background-color: var(--triadic-color1);
+}
+
+
+@media (max-width: 600px){
+.tempContainer {
+       
+        width: 85%;
+      
+    }
 }

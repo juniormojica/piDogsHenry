@@ -10,8 +10,7 @@ const TempFilter = () => {
     const dispatch = useDispatch()
     const temperaments = useSelector((state) => state.temperaments)
     const dogs = useSelector((state) => state.allDogs)
-    const [filter, setFilter] = useState([])
-    const [dogsForFilter, setDogsForFilter] = useState([])
+
 
 
     useState(() => {
@@ -23,7 +22,7 @@ const TempFilter = () => {
 
 
 
-    console.log(dogsForFilter);
+
     const handleSearch = (event) => {
         const value = event.target.value
 

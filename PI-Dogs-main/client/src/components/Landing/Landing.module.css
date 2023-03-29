@@ -1,4 +1,9 @@
 
+
+.componentContainer{
+    width: 100%;
+    height: 100%;
+}
 .landingContainer{
   
     width: 100%;
@@ -31,15 +36,18 @@
     left: 28rem;
     justify-content: center;
     align-items: center;
-    background-color: var(--hoover-action);
-    opacity: 0.7;
+   
+    background-color: var(--main-color);
+
    
     border-radius: 1rem;
 }
 
 
 .style{
-    color: white;   
+    color: rgb(0, 0, 0);   
+    text-align: center;
+    padding: 0.7rem
 }
 .button { 
     margin-top: 1rem;
@@ -50,9 +58,56 @@
 }
 
 .button:hover{
-    color: white;
-    background-color: var(--back-ground);
+    color: rgb(0, 0, 0);
+    background-color: var(--triadic-color1);
     cursor: pointer;
 
 }   
 
+@media (max-width: 600px) {
+.landingContainer {
+
+        
+
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+        .image {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+    
+        }
+  .mainImage {
+            width: 100%;
+            height: 100%;
+    
+        }
+
+                .intro {
+        
+                    height: 40vh;
+                    display: flex;
+                    flex-direction: column;
+                    width: 70%;
+                    position: absolute;
+                    top: 25rem;
+                    left: 6rem;
+                    justify-content: center;
+                    align-items: center;
+        
+                    background-color: var(--main-color);
+        
+        
+                    border-radius: 1rem;
+                }
+
+        .button {
+            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            width: 70%;
+        }
+}

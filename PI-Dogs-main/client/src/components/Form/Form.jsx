@@ -182,7 +182,7 @@ const Form = () => {
             return alert("Selecciona los temperamentos")
         }
 
-        console.log(errors);
+
         if (Object.values(errors).length === 0) {
 
             setForm({
@@ -210,7 +210,7 @@ const Form = () => {
 
         }
         else {
-            console.log(form);
+
             alert("Debes corregir los errores")
 
 

@@ -1,4 +1,4 @@
-import { all } from 'axios';
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { getAllDogs } from '../../redux/actions';

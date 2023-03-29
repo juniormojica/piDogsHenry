@@ -27,7 +27,7 @@
     list-style: none;
     padding-top: 0.5rem;
     border: 1px solid rgb(0, 0, 0);
-    background-color: var(--button-color);  
+    background-color: var(--main-color);  
     cursor: pointer;
     color: black;
     font-size: 1.3rem;
@@ -48,5 +48,5 @@
 }
 
 .pageNumbers li button:hover { 
-    background-color: var(--button-color);
+    background-color: var(--main-color);
 }

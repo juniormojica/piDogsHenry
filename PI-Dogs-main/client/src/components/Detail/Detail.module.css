@@ -1,7 +1,7 @@
 .detailContainer {
     display: flex;
   
-    background-color: var(--button-color);
+    background-color: var(--main-color);
     border-radius: 0.5rem;
     width: 70%;
     height: 50vh;
@@ -24,13 +24,15 @@ margin-top: 8rem;
     width: 50%;
     border-radius: 0.5rem;
     font-size: 1.5rem;
-   color: black ;
+   color: rgb(255, 255, 255) ;
     font-weight: 600;
-     background-color: rgb(13, 117, 35);
+    border: 1px solid white;
+     background-color: transparent;
 }
 
 .buttonContainer button:hover { 
     cursor: pointer;
+    background-color: var(--triadic-color1);
 }
 
 .style {

@@ -6,7 +6,7 @@
     align-items: center;
     margin: 1rem 0rem;
     height: 5vw;
-
+  
     /* background-color:var(--button-color); */
 }
 
@@ -17,10 +17,13 @@
     width: 55%;
     font-size: 1.3rem;
     font-weight: 600;
+    background-color: transparent;
+    border: 1px solid white;
+    color: rgb(255, 255, 255);
 
 }
 .search:hover {
-    background-color: var(--button-color);
+    background-color: var(--triadic-color1);
 }
 
 .buttonSearch {
@@ -66,5 +69,21 @@
 }
 
 .pageNumbers li.active {
-    background-color: var(--button-color);
+    background-color: var(--triadic-color1);
+}
+
+@media (max-width: 600px) {
+.center { 
+        width: 100%;
+        margin-top: 1.8rem;
+
+    }
+.search {
+        height: 80%;
+        width: 70%;
+        font-size: 1.1rem;
+        background-color: white;
+        color: rgb(0, 0, 0);
+
+    }
 }

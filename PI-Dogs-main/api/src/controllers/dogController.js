@@ -121,7 +121,7 @@ const getSingleDog = async (idRaza) => {
 
 
             }
-            console.log(formatDog);
+
             return formatDog
         }
     } else {

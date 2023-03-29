@@ -42,14 +42,14 @@ const Detail = () => {
         return (<h4>{tempsDb}</h4>);
     };
 
-    console.log(dogDetails.Temperaments);
+
 
     return (
         <>
             <div className={s.buttonContainer}>
                 <button onClick={goBack}>Regresar</button>
             </div>
-            
+
             {dogDetails && (
                 <div className={s.detailContainer}>
                     <div className={s.textInfo}>
